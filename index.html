@@ -46,6 +46,14 @@ section{padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem);max-width:1180px;margi
 .layer-info{margin-top:1rem;padding:1rem 1.2rem;border-left:4px solid var(--sun);background:var(--surface);border-radius:0 8px 8px 0;min-height:5.5rem}
 .layer-info b{font-family:"Bricolage Grotesque",sans-serif}
 .cap{font-size:.85rem;color:var(--muted);margin-top:.5rem}
+/* fondo hero */
+.hero-bg{background:linear-gradient(90deg,rgba(8,24,14,.86) 0%,rgba(8,24,14,.62) 55%,rgba(8,24,14,.45) 100%),url("fondo-techo-verde.png") center/cover no-repeat;color:#f2f4ec}
+.hero-bg .hero h1,:root[data-theme="dark"] .hero-bg .hero h1{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+.hero-bg .lead{color:#e3eadc}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero-bg .hero h1{color:#fff}}
+.hero-bg .layer-info{color:var(--ink)}
+.hero-bg .layer-info b{color:var(--ink)}
+.hero-bg .cap{color:#d5dccd}
 /* tabs */
 .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0}
 .tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.5rem 1.1rem;border-radius:99px;cursor:pointer;font:inherit;font-weight:500}
@@ -102,6 +110,7 @@ footer ul{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 2rem}
 <button id="theme" type="button" aria-label="Cambiar tema">Tema</button>
 </nav>
 
+<header class="hero-bg">
 <section class="hero" id="inicio">
 <div>
 <h1>Techos verdes, ciudades más vivas</h1>
@@ -114,6 +123,7 @@ footer ul{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 2rem}
 <p class="cap">Toca una capa para ver qué hace.</p>
 </div>
 </section>
+</header>
 
 <section id="problema">
 <h2>El problema y su solución</h2>
