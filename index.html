@@ -54,6 +54,13 @@ section{padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem);max-width:1180px;margi
 .hero-bg .layer-info{color:var(--ink)}
 .hero-bg .layer-info b{color:var(--ink)}
 .hero-bg .cap{color:#d5dccd}
+.prob-head{display:grid;grid-template-columns:1fr auto;gap:1.5rem 3rem;align-items:center}
+.prob-logo{width:clamp(150px,22vw,230px);height:auto;display:block;border-radius:16px;background:#f8f7f2;border:1px solid var(--line)}
+@media(max-width:700px){.prob-head{grid-template-columns:1fr}.prob-logo{order:-1;width:150px}}
+.prod{display:grid;grid-template-columns:1fr minmax(220px,340px);gap:1.5rem 2rem;align-items:center}
+.prod-img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line);background:#fff}
+@media(max-width:700px){.prod{grid-template-columns:1fr}.prod-img{max-width:340px;margin:0 auto}}
+.tec-img{width:100%;height:auto;max-height:420px;object-fit:cover;display:block;border-radius:14px;border:1px solid var(--line);margin:0 0 1.5rem}
 /* tabs */
 .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin:1.2rem 0}
 .tabs button{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:.5rem 1.1rem;border-radius:99px;cursor:pointer;font:inherit;font-weight:500}
@@ -77,15 +84,6 @@ section{padding:clamp(3rem,8vw,6rem) clamp(1rem,5vw,4rem);max-width:1180px;margi
 .bar i{display:block;height:14px;border-radius:7px;background:var(--leaf);transition:width .3s}
 .bar:nth-child(1) i{background:var(--muted)}
 .bar:nth-child(3) i{background:var(--sun)}
-/* gantt */
-.gantt{display:grid;grid-template-columns:200px repeat(12,1fr);gap:4px 0;font-size:.85rem;overflow-x:auto;min-width:0}
-.gwrap{overflow-x:auto;padding-bottom:.5rem}
-.gantt{min-width:760px}
-.gh{color:var(--muted);text-align:center;font-size:.78rem}
-.gl{padding:.5rem .4rem .5rem 0}
-.gb{border:0;font:inherit;font-weight:600;font-size:.8rem;color:#10240f;background:var(--leaf);border-radius:6px;padding:.5rem .5rem;cursor:pointer;text-align:left;margin:2px 3px}
-.gb[aria-pressed="true"]{background:var(--sun)}
-.gcell{border-left:1px solid var(--line)}
 /* flow */
 .flow{counter-reset:s;list-style:none;padding:0;margin:1.5rem 0 0;display:grid;gap:.6rem}
 .flow li{counter-increment:s;display:grid;grid-template-columns:2.2rem 1fr;gap:.8rem;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem}
@@ -106,7 +104,7 @@ footer ul{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 2rem}
 <body>
 <nav aria-label="Secciones">
 <b>Altura Viva</b>
-<a href="#problema">Problema</a><a href="#objetivos">Objetivos</a><a href="#mercado">Mercado</a><a href="#tecnico">Técnico</a><a href="#cronograma">Cronograma</a><a href="#proceso">Proceso</a><a href="#riesgos">Riesgos</a>
+<a href="#problema">Problema</a><a href="#objetivos">Objetivos</a><a href="#mercado">Mercado</a><a href="#tecnico">Técnico</a><a href="#proceso">Proceso</a><a href="#riesgos">Riesgos</a>
 <button id="theme" type="button" aria-label="Cambiar tema">Tema</button>
 </nav>
 
@@ -126,8 +124,13 @@ footer ul{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 2rem}
 </header>
 
 <section id="problema">
+<div class="prob-head">
+<div>
 <h2>El problema y su solución</h2>
 <p class="lead">Las zonas urbanas se calientan más que su entorno. Así lo planteó el árbol de problemas y así se convierte en objetivos.</p>
+</div>
+<img class="prob-logo" src="logo-altura-viva.png" alt="Logo de Altura Viva: edificio con techo verde y la frase Techos verdes, ciudades más vivas" width="230" height="228">
+</div>
 <div class="tabs" role="tablist" id="treeTabs">
 <button role="tab" aria-selected="true" data-t="p">Árbol de problemas</button>
 <button role="tab" aria-selected="false" data-t="s">Árbol de objetivos</button>
@@ -168,15 +171,9 @@ footer ul{padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:.4rem 2rem}
 <section id="tecnico">
 <h2>Estudio técnico</h2>
 <p class="lead">Sistema extensivo liviano de 6 capas, instalado por cuadrillas de 3 a 4 operarios.</p>
+<img class="tec-img" src="conjunto-techos-verdes.png" alt="Conjunto de viviendas con techos verdes, zonas comunes y montañas al fondo" width="885" height="497" loading="lazy">
 <div class="tabs" role="tablist" id="tTabs"></div>
 <div class="panel" id="tPanel" role="tabpanel"></div>
-</section>
-
-<section id="cronograma">
-<h2>Cronograma de 12 semanas</h2>
-<p class="lead">Del 2 de noviembre de 2026 al 24 de enero de 2027. Toca una fase para ver su hito.</p>
-<div class="gwrap"><div class="gantt" id="gantt"></div></div>
-<div class="layer-info" id="gInfo" aria-live="polite">Selecciona una fase.</div>
 </section>
 
 <section id="proceso">
@@ -263,7 +260,7 @@ function panels(tabSel,panelSel,data){
   tabs(tabSel,show);show(Object.keys(data)[0]);
 }
 panels("#mTabs","#mPanel",{
- "Producto":"<p><b>Techo verde extensivo llave en mano</b>: diseño, instalación, mantenimiento y garantía.</p><ul><li>Sistema liviano en capas con vegetación baja.</li><li>Aproximadamente 200 m² en 12 semanas.</li><li>Usuarios: propietarios, copropiedades, empresas y constructoras de Bogotá.</li></ul>",
+ "Producto":"<div class='prod'><div><p><b>Techo verde extensivo llave en mano</b>: diseño, instalación, mantenimiento y garantía.</p><ul><li>Sistema liviano en capas con vegetación baja.</li><li>Aproximadamente 200 m² en 12 semanas.</li><li>Usuarios: propietarios, copropiedades, empresas y constructoras de Bogotá.</li></ul></div><img class='prod-img' src='capas-techo-verde.png' alt='Infografía de Altura Viva con las capas del techo verde: vegetación, sustrato, capa filtrante, drenaje, barrera antiraíz, impermeabilización y losa' width='340' height='510' loading='lazy'></div>",
  "Demanda":"<ul><li>Enfoque: vivienda social urbana y edificios comerciales e institucionales.</li><li>Adopción actual del 18% y demanda proyectada de +35% en 5 años.</li><li>Se hizo una encuesta de intención de compra.</li></ul>",
  "Oferta":"<ul><li><b>Proveedores:</b> impermeabilizantes, sustratos, vegetación e instaladores.</li><li><b>Régimen:</b> competencia empresarial con pocos ofertantes especializados.</li><li><b>Rivales:</b> Groncol, Helecho – Ciudades Naturales y Sustentar Soluciones Verdes.</li></ul>",
  "Precio":"<ul><li>Referencia: $162.000/m² de techo verde.</li><li>Precio propuesto: $200.000 a $400.000 por m².</li><li>Mayor inversión inicial, compensada por ahorro energético.</li></ul>",
@@ -293,31 +290,6 @@ function calc(){
   $("#bars").innerHTML=rows.map(r=>`<div class="bar"><span>${r[0]}</span><i style="width:${r[1]/max*100}%"></i><b>${COP(r[1])}</b></div>`).join("");
 }
 area.oninput=calc;calc();
-
-/* gantt */
-const ph=[
- ["1. Diagnóstico y diseño","2–15 nov",1,2,"Diseño y cotización aprobados"],
- ["2. Contratación, SST y compras","16–29 nov",3,4,"Materiales en bodega"],
- ["3. Preparación e impermeabilización","30 nov–20 dic",5,7,"Prueba de estanqueidad aprobada"],
- ["4. Instalación de capas","21 dic–10 ene",8,10,"Sistema completo instalado"],
- ["5. Siembra, ajustes y entrega","11–24 ene",11,12,"Entrega y acta firmada"]
-];
-const g=$("#gantt");
-g.append(el("div","gh",""));
-[["Nov",4],["Dic",5],["Ene",3]].forEach(([m,n],i)=>{});
-for(let s=1;s<=12;s++)g.append(el("div","gh","S"+s));
-ph.forEach((p,i)=>{
-  g.append(el("div","gl",p[0]));
-  for(let s=1;s<=12;s++){
-    if(s===p[2]){
-      const b=el("button","gb",p[1]);b.type="button";b.style.gridColumn=`${p[2]+1} / span ${p[3]-p[2]+1}`;
-      b.setAttribute("aria-pressed","false");
-      b.onclick=()=>{g.querySelectorAll(".gb").forEach(x=>x.setAttribute("aria-pressed",x===b));
-        $("#gInfo").innerHTML=`<b>${p[0]}</b><br>Hito de cierre: ${p[4]}.`};
-      g.append(b);
-    }else if(s<p[2]||s>p[3]){g.append(el("div","gcell",""))}
-  }
-});
 
 /* flujo */
 const steps=[
